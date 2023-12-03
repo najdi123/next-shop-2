@@ -2,26 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  input,
+  textarea {
+    @apply border-solid border border-blue-600 rounded-md px-3 py-2 mb-3 w-full;
+  }
+  input:focus,
+  input:focus-visible,
+  textarea:focus {
+    @apply border-solid border-2 border-blue-600;
+  }
+  h1 {
+    @apply text-blue-700 mb-3 text-xl;
+  }
+  label {
+    @apply text-blue-700;
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
+@layer components {
+  .btn-primary {
+    @apply bg-blue-500 h-10 pt-1 pb-2 px-4 rounded-lg text-white;
+  }
+  .btn-primary:hover {
+    @apply bg-blue-900;
+  }
+  table.basic {
+    @apply w-full;
+  }
+  table.basic thead tr td {
+    @apply bg-blue-500 text-white;
+  }
+  table.basic tr td {
+    @apply border  border-blue-500 p-1;
+  }
+  table.basic a {
+    @apply bg-blue-800 text-white text-sm py-2 px-3 rounded-md inline-flex gap-1;
+  }
+}
