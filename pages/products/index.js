@@ -13,6 +13,20 @@ export default function Products() {
             setProducts(res.data)
         })
     }, [])
+    const [categories, setCategories] = useState([])
+    // const [category, setCategory] = useState('')
+    const getCategories = () => {
+        axios.get('/api/categories').then(res => setCategories(res.data))
+    }
+    useEffect(() => {
+        getCategories()
+    }, [])
+    const getCategoryName = (categoryId) => {
+        let category = categories.filter(item => item._id === categoryId)
+        if (category?.[0]?.name) {
+            return category?.[0]?.name
+        }
+    }
     return (
         <Layout>
             <div className="py-3 mb-3">
@@ -22,12 +36,14 @@ export default function Products() {
                 <thead>
                     <tr>
                         <td>Product Name</td>
+                        <td>Product Category</td>
                     </tr>
                 </thead>
                 <tbody>
                     {products?.map((product) => (
-                        <tr key={product.id}>
+                        <tr key={product._id}>
                             <td>{product.title}</td>
+                            <td>{product.category && getCategoryName(product.category)}</td>
                             <td className="flex gap-1">
                                 <Link href={'/products/edit/' + product._id}>
                                     <EditIcon />
