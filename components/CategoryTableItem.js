@@ -23,9 +23,9 @@ export default function CategoryTableItem({ category,
 
     return (
         <tr >
-            <td className=" px-3">{category?.name}</td>
-            <td className=" px-3">{category?.parent?.name}</td>
-            <td className="flex gap-3 p-2">
+            <td className=" px-3 flex items-center"><p>{category?.name}</p></td>
+            <td className=" px-3 flex items-center"><p>{category?.parent?.name}</p></td>
+            <td className="flex gap-3 p-2 flex-col sm:flex-row">
                 <button
                     className="btn btn-warning text-white"
                     onClick={() => editCurrentCategory(category)}
@@ -36,10 +36,8 @@ export default function CategoryTableItem({ category,
                 <button
                     onClick={() => {
                         document.getElementById('delete_modal_' + category._id).showModal()
-                        console.log('category', category)
-                        console.log('category.name', category.name)
                     }}
-                    className="flex p-3  rounded-md  gap-1 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300"
+                    className="flex p-3 btn  rounded-md  gap-1 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300"
                 >
                     <DeleteIcon />
                     Delete

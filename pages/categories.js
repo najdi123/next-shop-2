@@ -86,7 +86,7 @@ export default function Categories() {
             <label>{edit ? 'Edit Category' : 'Add New Category'}</label>
             <form onSubmit={formAction} id='categoryForm'>
                 <div className="flex gap-2">
-                    <input type="text" placeholder={edit ? edit.name : "Category name"} name='category' />
+                    <input className="h-10 mb-2" type="text" placeholder={edit ? edit.name : "Category name"} name='category' />
                     <select
                         className="border rounded-md border-blue-500 h-10 px-3"
                         value={parentCategory}
@@ -94,7 +94,7 @@ export default function Categories() {
                     >
                         <option value=''>No parent category</option>
                         {categories?.map((category, index) => (
-                            <option key={index} value={category._id}>{category?.name}</option>
+                            <option key={index} value={category._id}>{category?.name}{category.parent?.name && ' (' + category.parent?.name + ')'}</option>
                         ))}
                     </select>
                 </div>
@@ -109,7 +109,7 @@ export default function Categories() {
                     {properties?.length > 0 && properties.map((property, index) => (
                         <div key={index} className="flex gap-2 mb-3">
                             <input
-                                className="mb-0"
+                                className="mb-0 h-12"
                                 value={property.name}
                                 onChange={(e) => handlePropertyNameChange(e, property, index)}
                                 type="text"
@@ -117,7 +117,7 @@ export default function Categories() {
                                 placeholder="Property Name (example: color)"
                             />
                             <input
-                                className="mb-0"
+                                className="mb-0 h-12"
                                 onChange={(e) => handlePropertyValuesChange(e, property, index)}
                                 value={property.values}
                                 name={'propertyValues' + index}

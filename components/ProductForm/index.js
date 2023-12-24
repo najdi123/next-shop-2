@@ -148,7 +148,7 @@ export default function ProductForm({
         className="flex items-center gap-1 mb-2"
         key={property?._id ? property._id : Math.round(Math.random() * 10000)}
       >
-        <p className="p-1 font-bold h-8">
+        <p className="p-1 font-bold h-8 text-primary">
           {property?.name}
           {': '}
         </p>
@@ -157,7 +157,7 @@ export default function ProductForm({
             <p className=" p-1">{value}:</p>
             <input
               type="number"
-              className=" p-2 w-14 h-8 mb-0"
+              className=" w-14"
               placeholder="0"
               onChange={(e) => addProperty({ name: property.name, value, quantity: e.target.value })}
               value={getQuantityForProperty(property.name, value)}
@@ -203,46 +203,52 @@ export default function ProductForm({
 
   const propertiesToFill = () => {
     let categoryObject;
-
     if (categories.length > 0 && category) {
       categoryObject = categories?.filter((item) => item._id === category)?.[0];
     }
-
     return (
       <div>
-        <label>Category Properties</label>
-        {categoryObject?.properties?.map((property) => {
+        <label>Category Properties: </label>
+        {categoryObject?.properties.length > 0 ? categoryObject.properties.map((property) => {
+          console.log('property', property);
           return propertyForm(property);
-        })}
-        <label>Parent Category Properties</label>
-        {parentProperties?.map((property) => {
+        }) : <p>No Properties</p>}
+        <label>Parent Category Properties: </label>
+        {parentProperties.length > 0 ? parentProperties.map((property) => {
           return propertyForm(property);
-        })}
+        }) : <p>No Properties</p>}
       </div>
     );
   };
 
   return (
     <form onSubmit={formAction} encType="multipart/form-data">
-      <label>Product Name</label>
-      <input type="text" placeholder="Product Name" defaultValue={title ? title : ''} name="title" />
+      <label className='text-primary'>Product Name</label>
+      <input
+        className='rounded-sm border-gray-300'
+        type="text"
+        placeholder="Product Name"
+        defaultValue={title ? title : ''} name="title" />
       <label className="block">Product Category</label>
       <select
-        className="border rounded-md border-blue-500 h-10 px-3 my-2"
+        className="border rounded-sm border-gray-300 h-10 px-3 my-2"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
       >
         <option value="">No category</option>
         {categories?.map((category, index) => (
-          <option key={index} value={category._id}>
-            {category?.name}
+          <option
+            key={index}
+            value={category._id}
+          >
+            {category?.name}{category.parent?.name && ' (' + category.parent?.name + ')'}
           </option>
         ))}
       </select>
       {propertiesToFill()}
       <label className="block">Photos</label>
-      <div className="mb-2">
-        <label className="w-24 h-24 flex justify-center items-center text-gray-500 bg-gray-200 rounded-lg cursor-pointer">
+      <div className="my-2">
+        <label className="w-24 h-24 flex justify-center items-center text-gray-500 bg-gray-200 rounded-md cursor-pointer">
           <UploadIcon />
           Upload
           <input type="file" name="files" multiple className="hidden" onChange={uploadImages} />
@@ -255,7 +261,7 @@ export default function ProductForm({
               ))}
             </ReactSortable>
           ) : (
-            <p>No Photos in this Product</p>
+            <p className='mt-2'>No Photos in this Product</p>
           )}
           {isUploading && (
             <div className="w-40 m-h-60 m-3 ml-0 bg-gray-200 inline-flex justify-center items-center">
@@ -265,9 +271,9 @@ export default function ProductForm({
         </div>
       </div>
       <label>Description</label>
-      <textarea placeholder={'Description'} defaultValue={description ? description : ''} name="description" />
+      <textarea className='mb-2' placeholder={'Description'} defaultValue={description ? description : ''} name="description" />
       <label>Price</label>
-      <input type="number" placeholder="Price" defaultValue={price ? price : ''} name="price" />
+      <input className='mb-2 w-16 block' type="number" placeholder="Price" defaultValue={price ? price : ''} name="price" />
       <button type="submit" className="btn-primary">
         Save
       </button>

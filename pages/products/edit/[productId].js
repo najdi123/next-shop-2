@@ -14,7 +14,6 @@ export default function EditProductPage() {
             setProductInfo(res.data)
         }).catch((err) => console.log('err get Products', err))
     }, [productId])
-    console.log('productInfo', productInfo);
     return (
         <Layout>
             <h1 >Edit Product</h1>

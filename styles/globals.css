@@ -21,7 +21,7 @@
 }
 @layer components {
   .btn-primary {
-    @apply bg-blue-500 h-10 pt-1 pb-2 px-4 rounded-lg text-white;
+    @apply bg-primary h-10 pt-1 pb-2 px-4 rounded-lg text-white;
   }
   .btn-primary:hover {
     @apply bg-blue-900;
@@ -30,12 +30,30 @@
     @apply w-full;
   }
   table.basic thead tr td {
-    @apply bg-blue-500 text-white;
+    @apply bg-blue-500 text-white p-2 border-primary;
+  }
+  table.basic tr {
+    @apply flex min-w-full items-stretch;
   }
   table.basic tr td {
-    @apply border  border-blue-500;
+    @apply border  border-primary p-2 flex-1;
   }
   table.basic a {
-    @apply bg-blue-800 text-white text-sm py-2 px-3 rounded-md inline-flex gap-1;
+    @apply bg-primary text-white text-sm py-2 px-3 rounded-md inline-flex gap-1;
+  }
+  label {
+    @apply block text-primary;
+  }
+  h1 {
+    @apply text-gray-500 text-3xl;
+  }
+  input {
+    @apply p-2  h-8 mb-0 rounded-sm border-gray-300;
+  }
+  textarea {
+    @apply p-2 mb-0 rounded-sm border-gray-300;
+  }
+  select {
+    @apply border rounded-sm border-gray-300 h-10 px-3;
   }
 }

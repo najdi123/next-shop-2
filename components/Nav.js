@@ -17,9 +17,9 @@ const NavigationItems = [
 const GetIcon = (Icon) => {
     return <Icon />
 }
-export default function Nav() {
+export default function Nav({ showNav }) {
     const inactiveLink = 'flex gap-6 p-4'
-    const activeLink = inactiveLink + ' bg-white text-blue-900'
+    const activeLink = inactiveLink + ' bg-white text-primary'
     const pathname = usePathname()
     const CheckClassName = (item) => {
         if (item.URL === '/') {
@@ -35,10 +35,10 @@ export default function Nav() {
 
     }
     return (
-        <aside className="text-white bg-blue-900 ">
-            {/* <Link href={'/'} className="flex gap-1 mb-12 w-full bg-white bg-opacity-10 p-6"> */}
-            {/* <Link href={'/'} className="flex gap-1 mb-12 w-full bg-gradient-to-r from-blue-900 from-30% via-blue-700 via-86% to-blue-500  p-6"> */}
-            <Link href={'/'} className="flex gap-1 mb-12 w-full bg-blue-600  p-6">
+        <aside className={`text-gray-500 bg-gray-200 fixed w-full md:w-auto md:static h-[100vh]
+          ${showNav ? '' : '-left-full'} transition-all`}
+        >
+            <Link href={'/'} className="flex gap-1 mb-12 w-full bg-gray-300  p-6">
                 <ShopIcon />
                 <span className="min-w-max">Next Shop Admin</span>
             </Link>

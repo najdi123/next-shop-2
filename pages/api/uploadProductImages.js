@@ -1,7 +1,16 @@
+import { isAdminRequest } from './auth/[...nextauth]';
+
 const multiparty = require('multiparty');
+// to run locally
+// .\minio.exe server C:\minio
 const Minio = require('minio');
+const { mongooseConnect } = require("@/lib/mongoose")
+
 
 export default async function handle(req, res) {
+    await mongooseConnect();
+    await isAdminRequest(req, res)
+
     const form = new multiparty.Form(config);
     const { fields, files } = await new Promise((resolve, reject) => {
         form.parse(req, (err, fields, files) => {

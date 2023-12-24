@@ -30,13 +30,14 @@ export default function Products() {
     return (
         <Layout>
             <div className="py-3 mb-3">
-                <Link className="bg-blue-900 text-white rounded-md py-3 px-4 mt-6" href={'/products/new'}>Add new product</Link>
+                <Link className="bg-primary text-white rounded-md py-3 px-4 mt-6" href={'/products/new'}>Add new product</Link>
             </div>
             <table className="basic">
                 <thead>
                     <tr>
                         <td>Product Name</td>
                         <td>Product Category</td>
+                        <td>Actions</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,7 +45,7 @@ export default function Products() {
                         <tr key={product._id}>
                             <td>{product.title}</td>
                             <td>{product.category && getCategoryName(product.category)}</td>
-                            <td className="flex gap-1">
+                            <td className="flex gap-1 py-2 flex-col sm:flex-row">
                                 <Link href={'/products/edit/' + product._id}>
                                     <EditIcon />
                                     Edit
